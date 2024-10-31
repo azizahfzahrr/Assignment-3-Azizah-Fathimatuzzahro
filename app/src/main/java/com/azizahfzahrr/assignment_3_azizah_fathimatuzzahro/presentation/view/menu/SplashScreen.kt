@@ -1,4 +1,4 @@
-package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view
+package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu
 
 import android.content.Intent
 import android.os.Bundle
@@ -22,8 +22,10 @@ class SplashScreen : AppCompatActivity() {
 
         lifecycleScope.launch {
             delay(3000)
-            startActivity(Intent(this@SplashScreen, OnboardingActivity::class.java))
-            finish()
+            if (!isFinishing){
+                startActivity(Intent(this@SplashScreen, OnboardingActivity::class.java))
+                finish()
+            }
         }
     }
 }

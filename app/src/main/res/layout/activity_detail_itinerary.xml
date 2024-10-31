@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.view.menu.DetailItineraryActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_back_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_back_arrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/left_arrow" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/iv_detail_itinerary"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/rajaampat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name_destination_detail_itinerary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Raja Ampat"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_detail_itinerary"
+        app:layout_constraintStart_toStartOf="@id/iv_detail_itinerary"/>
+
+    <TextView
+        android:id="@+id/tv_place_destination_detail_itinerary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Papua, Indonesia"
+        android:textColor="@color/grey_font"
+        android:fontFamily="@font/poppins"
+        android:textSize="18sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@id/tv_name_destination_detail_itinerary"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_destination_detail_itinerary" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:progressTint="@color/yellow"
+        android:rating="4.5"
+        android:stepSize="0.5"
+        android:layout_marginEnd="100dp"
+        app:layout_constraintTop_toTopOf="@id/tv_name_destination_detail_itinerary"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_rate_destination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="4.5"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+        app:layout_constraintStart_toEndOf="@id/ratingBar"
+        app:layout_constraintTop_toTopOf="@id/ratingBar" />
+
+    <TextView
+        android:id="@+id/tv_activity_detail_itinerary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ini activitynya"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/tv_place_destination_detail_itinerary"
+        app:layout_constraintTop_toBottomOf="@id/tv_place_destination_detail_itinerary"/>
+
+    <TextView
+        android:id="@+id/tv_estimate_detail_itinerary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estimate"
+        android:fontFamily="@font/poppins"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@id/ratingBar"
+        app:layout_constraintTop_toBottomOf="@id/ratingBar"/>
+
+    <TextView
+        android:id="@+id/tv_fill_estimate_detail_itinerary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2D 1N"
+        android:textSize="10sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_estimate_detail_itinerary"
+        app:layout_constraintTop_toTopOf="@id/tv_estimate_detail_itinerary"
+        app:layout_constraintStart_toEndOf="@id/tv_estimate_detail_itinerary"/>
+
+    <TextView
+        android:id="@+id/tv_type_detail_itinerary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type Itinerary"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="12sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/tv_activity_detail_itinerary"
+        app:layout_constraintTop_toBottomOf="@id/tv_activity_detail_itinerary"/>
+
+    <TextView
+        android:id="@+id/tv_fill_type_itinerary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activity"
+        android:textSize="10sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_type_detail_itinerary"
+        app:layout_constraintStart_toStartOf="@id/tv_type_detail_itinerary"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

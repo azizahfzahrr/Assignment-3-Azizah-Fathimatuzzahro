@@ -17,11 +17,20 @@
         android:theme="@style/Theme.Assignment3AzizahFathimatuzzahro"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.view.menu.DetailItineraryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.menu.ListAllActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.menu.ListAllDestinationActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.itinerary.AddItineraryActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".presentation.view.PrivacyPolicyActivity"
+            android:name=".presentation.view.menu.PrivacyPolicyActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.view.onboarding.OnboardingActivity3"
@@ -36,17 +45,17 @@
             android:name=".presentation.view.detail.DetailDestinationActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.view.DetailProfileActivity"
+            android:name=".presentation.view.menu.DetailProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.view.PreferencesActivity"
+            android:name=".presentation.view.menu.PreferencesActivity"
             android:exported="false"
             android:theme="@style/Theme.Assignment3AzizahFathimatuzzahro" />
         <activity
             android:name=".presentation.view.auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.view.SplashScreen"
+            android:name=".presentation.view.menu.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,7 +64,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.view.MainActivity"
+            android:name=".presentation.view.menu.MainActivity"
             android:exported="true" /> <!-- Change made here -->
         <meta-data
             android:name="preloaded_fonts"

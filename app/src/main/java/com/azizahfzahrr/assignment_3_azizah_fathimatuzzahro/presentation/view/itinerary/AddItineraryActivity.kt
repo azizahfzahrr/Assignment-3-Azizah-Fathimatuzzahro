@@ -1,17 +1,13 @@
 package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.itinerary
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.R
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.DetailTravelResponse
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.source.room.ItineraryEntity
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.databinding.ActivityAddItineraryBinding
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.MainActivity
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu.MainActivity
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu.ItineraryFragment
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.viewmodel.AddItineraryViewModel
 import com.bumptech.glide.Glide

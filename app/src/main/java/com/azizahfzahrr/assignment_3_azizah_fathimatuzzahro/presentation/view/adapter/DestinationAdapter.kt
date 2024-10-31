@@ -27,6 +27,7 @@ class DestinationAdapter(private val onItemClick: (Int) -> Unit) : RecyclerView.
             binding.tvPlaceDestination.text = destination.location
             binding.tvTypeDestination.text = destination.type
 
+
             destination.image?.let {
                 Glide.with(binding.root.context)
                     .load(it)
@@ -76,6 +77,12 @@ class DestinationAdapter(private val onItemClick: (Int) -> Unit) : RecyclerView.
     }
 
     fun setDestinations(newDestinations: List<TravelResponse.Data?>) {
+        destinations.clear()
+        destinations.addAll(newDestinations)
+        notifyDataSetChanged()
+    }
+
+    fun updateDestinations(newDestinations: List<TravelResponse.Data?>) {
         destinations.clear()
         destinations.addAll(newDestinations)
         notifyDataSetChanged()

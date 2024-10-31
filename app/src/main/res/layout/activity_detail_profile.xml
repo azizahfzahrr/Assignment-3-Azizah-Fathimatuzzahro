@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="16dp"
     android:background="@android:color/white"
-    tools:context=".presentation.view.DetailProfileActivity">
+    tools:context=".presentation.view.menu.DetailProfileActivity">
 
     <ImageView
         android:id="@+id/iv_arrow_left_edit"

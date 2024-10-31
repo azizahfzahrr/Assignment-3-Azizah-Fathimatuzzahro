@@ -1,4 +1,4 @@
-package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view
+package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

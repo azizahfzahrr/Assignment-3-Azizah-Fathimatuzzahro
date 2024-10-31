@@ -1,5 +1,6 @@
 package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -37,13 +38,31 @@ class ItineraryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[ItineraryViewModel::class.java]
-        itineraryAdapter = ItineraryAdapter()
+        itineraryAdapter = ItineraryAdapter { itinerary ->
+            val intent = Intent(requireContext(), DetailItineraryActivity::class.java).apply {
+                putExtra("itinerary_name", itinerary.name)
+                putExtra("itinerary_location", itinerary.location)
+                putExtra("itinerary_popularity", itinerary.popularity)
+                putExtra("itinerary_type", itinerary.type)
+                putExtra("itinerary_image", itinerary.image)
+            }
+            startActivity(intent)
+        }
+
         binding.rvItinerary.layoutManager = LinearLayoutManager(context)
         binding.rvItinerary.adapter = itineraryAdapter
 
         viewModel.allItineraries.observe(viewLifecycleOwner) { itineraries ->
-            Log.d("------ItineraryFragment", "------Received itineraries: $itineraries")
-            itineraryAdapter.submitList(itineraries)
+            if (itineraries.isNullOrEmpty()) {
+                binding.ivNoData.visibility = View.VISIBLE
+                binding.rvItinerary.visibility = View.GONE
+                binding.tvNoData.visibility = View.VISIBLE
+            } else {
+                binding.ivNoData.visibility = View.GONE
+                binding.rvItinerary.visibility = View.VISIBLE
+                binding.tvNoData.visibility = View.GONE
+                itineraryAdapter.submitList(itineraries)
+            }
         }
     }
 }

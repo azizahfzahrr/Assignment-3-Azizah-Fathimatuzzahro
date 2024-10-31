@@ -9,7 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.databinding.ActivityLoginBinding
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.PreferencesActivity
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu.PreferencesActivity
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view
+package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu
 
 import android.app.Activity
 import android.content.Intent
@@ -9,9 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.R
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.databinding.ActivityMainBinding
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu.HomeFragment
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu.ItineraryFragment
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

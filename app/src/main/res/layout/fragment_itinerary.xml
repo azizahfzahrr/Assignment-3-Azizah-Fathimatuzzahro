@@ -6,6 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".presentation.view.menu.ItineraryFragment">
 
+    <ImageView
+        android:id="@+id/ivNoData"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:src="@drawable/no_data"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Itinerary is empty"
+        android:visibility="invisible"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="20sp"
+        android:textColor="@color/background"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/ivNoData"
+        app:layout_constraintStart_toStartOf="@id/ivNoData"
+        app:layout_constraintEnd_toEndOf="@id/ivNoData"/>
+
     <TextView
         android:id="@+id/tv_destination_itinerary_fragment"
         android:layout_width="wrap_content"

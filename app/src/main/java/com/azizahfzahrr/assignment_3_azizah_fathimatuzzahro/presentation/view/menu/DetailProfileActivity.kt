@@ -1,4 +1,4 @@
-package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view
+package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu
 
 import android.os.Bundle
 import android.widget.Toast
@@ -11,7 +11,6 @@ import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.viewmod
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.viewmodel.UserState
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

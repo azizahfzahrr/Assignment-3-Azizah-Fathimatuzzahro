@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.databinding.ItemDestinationRowBinding
 import com.bumptech.glide.Glide
 
-class ItineraryAdapter : ListAdapter<ItineraryEntity, ItineraryAdapter.ViewHolder>(ItineraryDiffCallback()) {
+class ItineraryAdapter(
+    private val onClick: (ItineraryEntity) -> Unit
+) : ListAdapter<ItineraryEntity, ItineraryAdapter.ViewHolder>(ItineraryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemDestinationRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,6 +20,9 @@ class ItineraryAdapter : ListAdapter<ItineraryEntity, ItineraryAdapter.ViewHolde
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val itinerary = getItem(position)
         holder.bind(itinerary)
+        holder.itemView.setOnClickListener {
+            onClick(itinerary)
+        }
     }
 
     class ViewHolder(private val binding: ItemDestinationRowBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -35,12 +40,10 @@ class ItineraryAdapter : ListAdapter<ItineraryEntity, ItineraryAdapter.ViewHolde
 
     class ItineraryDiffCallback : DiffUtil.ItemCallback<ItineraryEntity>() {
         override fun areItemsTheSame(oldItem: ItineraryEntity, newItem: ItineraryEntity): Boolean {
-
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: ItineraryEntity, newItem: ItineraryEntity): Boolean {
-
             return oldItem == newItem
         }
     }
