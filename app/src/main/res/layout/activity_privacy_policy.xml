@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.view.PrivacyPolicyActivity">
+
+    <TextView
+        android:id="@+id/tv_privacy_policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/privacy_policy"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_back_button_privacy_policy"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:layout_goneMarginStart="20dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_privacy_policy"
+        app:layout_constraintBottom_toBottomOf="@id/tv_privacy_policy">
+
+        <ImageView
+            android:id="@+id/iv_back_arrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/left_arrow" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tv_concelation_policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancellation_policy"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="18sp"
+        android:textColor="@color/background"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@id/card_back_button_privacy_policy"
+        app:layout_constraintTop_toBottomOf="@id/card_back_button_privacy_policy"/>
+
+    <TextView
+        android:id="@+id/tv_cancellation_point_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/cancellation_point_1"
+        android:fontFamily="@font/poppins"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/tv_concelation_policy"
+        app:layout_constraintTop_toBottomOf="@id/tv_concelation_policy"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_cancellation_point_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/cancellation_point_2"
+        android:fontFamily="@font/poppins"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/tv_cancellation_point_1"
+        app:layout_constraintTop_toBottomOf="@id/tv_cancellation_point_1"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_terms_conditions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/terms_and_conditions"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="18sp"
+        android:textColor="@color/background"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/tv_concelation_policy"
+        app:layout_constraintTop_toBottomOf="@id/tv_cancellation_point_2"/>
+
+    <TextView
+        android:id="@+id/tv_terms_point_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/terms_point_1"
+        android:fontFamily="@font/poppins"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/tv_terms_conditions"
+        app:layout_constraintTop_toBottomOf="@id/tv_terms_conditions"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_terms_point_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/terms_point_2"
+        android:fontFamily="@font/poppins"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/tv_terms_point_1"
+        app:layout_constraintTop_toBottomOf="@id/tv_terms_point_1"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_terms_point_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/terms_point_3"
+        android:fontFamily="@font/poppins"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/tv_terms_point_2"
+        app:layout_constraintTop_toBottomOf="@id/tv_terms_point_2"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

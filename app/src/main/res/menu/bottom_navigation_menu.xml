@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/home_fix"
+        android:title="@string/home"
+        android:enabled="true" />
+
+    <item
+        android:id="@+id/nav_itinerary"
+        android:icon="@drawable/map"
+        android:title="@string/itinerary"
+        android:enabled="true" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/profile_circle"
+        android:title="@string/profile"
+        android:enabled="true"
+        />
+
+</menu>

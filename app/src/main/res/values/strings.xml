@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Assignment-3-Azizah-Fathimatuzzahro</string>
+    <string name="welcome">Welcome!</string>
+    <string name="explore_amazing_places_learn_new_n_cultures_and_places">Explore amazing places. Learn new\n cultures and places</string>
+    <string name="on_boarding_titles_">Explore\nExotic Destinations</string>
+    <string name="on_boarding_text_">Embark on a virtual journey through stunning</string>
+    <string name="on_boarding_text_2">destinations worldwide</string>
+    <string name="fill_destination_detail">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </string>
+    <string name="login">Login</string>
+
+    <string-array name="on_boarding_titles">
+        <item>Welcome to the App</item>
+        <item>Track your Progress</item>
+        <item>Get Started Now</item>
+    </string-array>
+
+    <string-array name="on_boarding_texts">
+        <item>This app helps you get things done efficiently.</item>
+        <item>Keep track of your tasks and milestones easily.</item>
+        <item>Sign up and explore all the features now!</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="itinerary">Itinerary</string>
+    <string name="tell_us_your_travel_preferences_and_we_ll_tailor_recommendation_to_your_style_don_t_worry_you_can_always_change_it_later_in_the_settings">Tell us your travel preferences, and we\'ll tailor recommendation to your style. Don\'t worry, you can always change it later in the settings.</string>
+    <string name="travel_preferences">Travel Preferences</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="done">Done</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="get_ready_for_the_next_trip">Get ready for the next trip</string>
+    <string name="find_thousand_of_tourist_destinations_ready_for_you_to_visit">Find thousand of tourist destinations\nready for you to visit</string>
+    <string name="explore_the_world_today">Explore the world today</string>
+    <string name="discover_take_your_travel_to_next_level">Discover - take your travel to next level</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="cancellation_policy">Cancellation Policy</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="terms_point_1">1. Pengguna wajib memberikan informasi yang akurat saat mendaftar.</string>
+    <string name="terms_point_2">3. Pengguna bertanggung jawab atas validitas dokumen perjalanan, seperti paspor dan visa.</string>
+    <string name="terms_point_3">3. Aplikasi tidak bertanggung jawab atas kerugian yang disebabkan oleh kondisi di luar kendali, seperti cuaca buruk atau penundaan transportasi.</string>
+    <string name="cancellation_point_2">2. Tidak ada pengembalian dana untuk pembatalan dalam waktu kurang dari 7 hari.</string>
+    <string name="cancellation_point_1">1. Pembatalan lebih dari 14 hari sebelum keberangkatan mendapatkan pengembalian 100%, sementara pembatalan 7-14 hari hanya akan mengembalikan 50%.</string>
+
+</resources>

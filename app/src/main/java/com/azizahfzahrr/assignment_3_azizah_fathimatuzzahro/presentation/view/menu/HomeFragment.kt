@@ -1,0 +1,194 @@
+package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu
+
+import android.content.Intent
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.R
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.TravelResponse
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.databinding.FragmentHomeBinding
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.adapter.DestinationAdapter
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.viewmodel.HomeViewModel
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.viewmodel.UserProfileViewModel
+import com.bumptech.glide.Glide
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.detail.DetailDestinationActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+
+@AndroidEntryPoint
+class HomeFragment : Fragment() {
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    private val homeViewModel: HomeViewModel by viewModels()
+    private val userProfileViewModel: UserProfileViewModel by viewModels()
+    private lateinit var destinationAdapter: DestinationAdapter
+
+    private var originalDestinations: List<TravelResponse.Data?> = emptyList()
+    private var selectedType: String? = null
+
+    companion object {
+        fun newInstance(selectedType: String?): HomeFragment {
+            val fragment = HomeFragment()
+            val args = Bundle()
+            args.putString("selectedType", selectedType)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        selectedType = arguments?.getString("selectedType")
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        selectedType = requireActivity().intent.getStringExtra("selectedType")
+
+        binding.tvTitle.text = getString(R.string.explore_the_world_today)
+        binding.tvSubtitle.text = getString(R.string.discover_take_your_travel_to_next_level)
+
+        setupRecyclerView()
+        setupSwipeRefreshLayout()
+        setupSearchFunctionality()
+
+        lifecycleScope.launch {
+            userProfileViewModel.fetchUserProfile()
+            homeViewModel.fetchTravelData()
+        }
+
+    }
+
+    private fun setupSearchFunctionality() {
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val searchText = s.toString()
+                filterDestinations(searchText)
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+    private fun filterDestinations(query: String) {
+        val filteredList = if (query.isEmpty()) {
+            originalDestinations
+        } else {
+            originalDestinations.filter { destination ->
+                val nameMatches = destination?.name?.contains(query, ignoreCase = true) == true
+                nameMatches
+            }
+        }
+        destinationAdapter.setDestinations(filteredList)
+    }
+
+//    private fun loadUserAvatar(avatarUrl: String?) {
+//        Log.d("HomeFragment", "Loading avatar from URL: $avatarUrl")
+//
+//        if (!avatarUrl.isNullOrEmpty()) {
+//            Glide.with(this)
+//                .load(avatarUrl)
+//                .circleCrop()
+//                .into(binding.ivProfileHome)
+//        } else {
+//            showError("Avatar URL is empty.")
+//        }
+//    }
+
+    private fun setupRecyclerView() {
+        destinationAdapter = DestinationAdapter { destinationId ->
+            val intent = Intent(activity, DetailDestinationActivity::class.java).apply {
+                putExtra("destination_id", destinationId)
+            }
+            startActivity(intent)
+        }
+
+        binding.rvDestination.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = destinationAdapter
+
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val visibleItemCount = childCount
+                    val totalItemCount = adapter?.itemCount ?: 0
+                    val firstVisibleItemPosition = (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+
+                    if (!homeViewModel.isLoading.value!! &&
+                        visibleItemCount + firstVisibleItemPosition >= totalItemCount &&
+                        firstVisibleItemPosition >= 0) {
+                        homeViewModel.fetchTravelData()
+                    }
+                }
+            })
+        }
+    }
+
+    private fun setupSwipeRefreshLayout() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            homeViewModel.fetchTravelData()
+        }
+
+        homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.swipeRefreshLayout.isRefreshing = isLoading
+        }
+
+        homeViewModel.travelData.observe(viewLifecycleOwner) { travelData ->
+            if (travelData.isNullOrEmpty()) {
+                showError("No travel data available.")
+            } else {
+                originalDestinations = travelData
+                val filteredData = travelData.filter { it?.type == selectedType }
+                destinationAdapter.setDestinations(filteredData)
+            }
+        }
+
+        homeViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            if (!errorMessage.isNullOrEmpty()) {
+                showError(errorMessage)
+            }
+        }
+    }
+
+//    private fun observeViewModel() {
+//        userProfileViewModel.userProfile.observe(viewLifecycleOwner) { userProfile ->
+//            val avatarUrl = userProfile?.data?.avatar // Get avatar URL from user profile
+//            Log.d("HomeFragment", "Fetched user profile: $userProfile") // Log the entire user profile
+//
+//            loadUserAvatar(avatarUrl)
+//
+//            lifecycleScope.launch {
+//                originalDestinations = homeViewModel.travelData.value ?: emptyList()
+//            }
+//        }
+//    }
+
+    private fun showError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.view.detail.DetailDestinationActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_back_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_back_arrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/left_arrow" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/iv_image_detail_destination"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="300dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/rajaampat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="-22dp"
+        app:cardCornerRadius="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_image_detail_destination">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_name_destination_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Raja Ampat"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+            
+            <TextView
+                android:id="@+id/tv_place_destination_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Papua, Indonesia"
+                android:textColor="@color/grey_font"
+                android:fontFamily="@font/poppins"
+                android:textSize="18sp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@id/tv_name_destination_detail"
+                app:layout_constraintTop_toBottomOf="@id/tv_name_destination_detail" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:progressTint="@color/yellow"
+                android:rating="4.5"
+                android:stepSize="0.5"
+                app:layout_constraintStart_toStartOf="@id/tv_place_destination_detail"
+                app:layout_constraintTop_toBottomOf="@id/tv_place_destination_detail" />
+
+            <TextView
+                android:id="@+id/tv_rate_destination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/poppins"
+                android:text="4.5"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                app:layout_constraintStart_toEndOf="@id/ratingBar"
+                app:layout_constraintTop_toTopOf="@id/ratingBar" />
+
+            <TextView
+                android:id="@+id/tv_about_destination_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About Destination"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="16sp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="@id/ratingBar"
+                app:layout_constraintTop_toBottomOf="@id/ratingBar"/>
+
+            <TextView
+                android:id="@+id/tv_fill_about_destination_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/fill_destination_detail"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintStart_toStartOf="@+id/tv_about_destination_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_about_destination_detail"
+                />
+
+            <TextView
+                android:id="@+id/tv_activity_detail_destination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ini activitynya"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/ratingBar"
+                app:layout_constraintStart_toStartOf="@id/ratingBar"
+                />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save_destination"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Save Destination"
+                app:cornerRadius="12dp"
+                android:backgroundTint="@color/background"
+                app:layout_constraintEnd_toEndOf="@id/tv_fill_about_destination_detail"
+                app:layout_constraintStart_toStartOf="@+id/tv_fill_about_destination_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_fill_about_destination_detail" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Assignment3AzizahFathimatuzzahro"
+        tools:targetApi="31">
+        <activity
+            android:name=".presentation.view.itinerary.AddItineraryActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".presentation.view.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.onboarding.OnboardingActivity3"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.onboarding.OnboardingActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.onboarding.OnboardingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.detail.DetailDestinationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.DetailProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.PreferencesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Assignment3AzizahFathimatuzzahro" />
+        <activity
+            android:name=".presentation.view.auth.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.view.MainActivity"
+            android:exported="true" /> <!-- Change made here -->
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>
