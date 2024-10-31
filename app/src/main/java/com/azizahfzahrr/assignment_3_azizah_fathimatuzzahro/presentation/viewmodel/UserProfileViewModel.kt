@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.LoginResponse
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.repository.UserRepository
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.source.local.UserPreferences
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.source.local.UserSession
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.domain.usecase.FetchUserProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserProfileViewModel @Inject constructor(
-    private val fetchUserProfileUseCase: FetchUserProfileUseCase
+    private val fetchUserProfileUseCase: FetchUserProfileUseCase,
+    private val userSession: UserSession
 ) : ViewModel() {
 
     private val _userState = MutableStateFlow<UserState>(UserState.Loading)
@@ -39,6 +42,13 @@ class UserProfileViewModel @Inject constructor(
             } catch (e: Exception) {
                 _userState.value = UserState.Error(e.message ?: "Unknown error")
             }
+        }
+    }
+
+    fun getUserData(callback: (UserPreferences.UserProfile?) -> Unit) {
+        viewModelScope.launch {
+            val userProfile = userSession.getUserProfile()
+            callback(userProfile)
         }
     }
 }

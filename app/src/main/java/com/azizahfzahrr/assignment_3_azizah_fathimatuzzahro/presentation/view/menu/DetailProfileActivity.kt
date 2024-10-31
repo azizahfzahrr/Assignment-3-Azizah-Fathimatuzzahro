@@ -24,6 +24,10 @@ class DetailProfileActivity : AppCompatActivity() {
         binding = ActivityDetailProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.ivArrowLeftEdit.setOnClickListener {
+            onBackPressed()
+        }
+
         observeUserProfile()
     }
 

@@ -27,4 +27,8 @@ class UserSession @Inject constructor(private val userPreferences: UserPreferenc
     suspend fun getUserToken(): String? {
         return userPreferences.getUserToken()
     }
+
+    suspend fun getUserProfile(): UserPreferences.UserProfile? {
+        return userPreferences.getUserProfil()
+    }
 }

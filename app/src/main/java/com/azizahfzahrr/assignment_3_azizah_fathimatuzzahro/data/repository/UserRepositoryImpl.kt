@@ -2,7 +2,6 @@ package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.repository
 
 import android.util.Log
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.LoginResponse
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.source.local.UserPreferences
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.source.remote.ApiService
 import javax.inject.Inject
 

@@ -13,6 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.LoginResponse
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.source.local.UserPreferences
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.source.local.UserSession
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.databinding.FragmentProfileBinding
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.auth.LoginActivity
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.viewmodel.UserProfileViewModel
@@ -37,25 +39,8 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
-            viewModel.userState.collect { state ->
-                when (state) {
-                    is UserState.Success -> {
-                        state.user?.let { user ->
-                            saveUserToLocal(user)
-                            displayUser(user)
-                        } ?: loadUserFromLocal()
-                    }
-                    is UserState.Error -> {
-                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
-                    }
-                    is UserState.Loading -> {
-                        // Show loading state if needed
-                    }
-                    UserState.Logout -> {
-                        startActivity(Intent(requireContext(), LoginActivity::class.java))
-                        activity?.finish()
-                    }
-                }
+            viewModel.getUserData {
+                displayUser(it)
             }
         }
 
@@ -76,38 +61,16 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun displayUser(user: LoginResponse.Data?) {
-        Glide.with(this)
-            .load(user?.avatar)
-            .circleCrop()
-            .into(binding.profileImage)
-
+    private fun displayUser(user: UserPreferences.UserProfile?) {
         binding.apply {
+            Glide.with(this@ProfileFragment)
+                .load(user?.avatar ?: "https://cdn.antaranews.com/cache/1200x800/2023/03/01/6C28C3C3-550F-4868-9E6A-641681A377AA.jpeg.webp")
+                .circleCrop()
+                .into(binding.profileImage)
             tvFirstName.text = user?.firstName ?: "No first name"
             tvLastName.text = user?.lastName ?: "No last name"
             tvEmailProfile.text = user?.email ?: "No email"
         }
-    }
-
-    private fun saveUserToLocal(user: LoginResponse.Data) {
-        val sharedPreferences = requireContext().getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
-        sharedPreferences.edit().apply {
-            putString("avatar", user.avatar)
-            putString("firstName", user.firstName)
-            putString("lastName", user.lastName)
-            putString("email", user.email)
-            apply()
-        }
-    }
-
-    private fun loadUserFromLocal() {
-        val sharedPreferences = requireContext().getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
-        val avatar = sharedPreferences.getString("avatar", null)
-        val firstName = sharedPreferences.getString("firstName", "No first name")
-        val lastName = sharedPreferences.getString("lastName", "No last name")
-        val email = sharedPreferences.getString("email", "No email")
-
-        displayUser(LoginResponse.Data(avatar, firstName, lastName, email, null, null))
     }
 
     private fun showLogoutConfirmationDialog() {

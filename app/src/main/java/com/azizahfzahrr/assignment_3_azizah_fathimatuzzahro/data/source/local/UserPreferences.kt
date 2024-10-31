@@ -26,7 +26,17 @@ class UserPreferences @Inject constructor(@ApplicationContext private val contex
         val PHONE = stringPreferencesKey("phone")
         val TOKEN = stringPreferencesKey("token")
         val IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
+        val AVATAR = stringPreferencesKey("avatar")
     }
+
+    data class UserProfile(
+        val firstName: String?,
+        val lastName: String?,
+        val phone: String?,
+        val email: String?,
+        val avatar: String?
+    )
+
 
     val isUserLoggedIn: Flow<Boolean> = context.dataStore.data.map { preferences ->
         preferences[PreferencesKeys.IS_LOGGED_IN] ?: false
@@ -46,6 +56,7 @@ class UserPreferences @Inject constructor(@ApplicationContext private val contex
             preferences[PreferencesKeys.PHONE] = userData.phone ?: ""
             preferences[PreferencesKeys.TOKEN] = userData.token ?: ""
             preferences[PreferencesKeys.IS_LOGGED_IN] = true
+            preferences[PreferencesKeys.AVATAR] = userData.avatar ?: ""
         }
     }
 
@@ -56,6 +67,18 @@ class UserPreferences @Inject constructor(@ApplicationContext private val contex
     suspend fun getUserToken(): String? {
         return context.dataStore.data.map { preferences ->
             preferences[PreferencesKeys.TOKEN]
+        }.firstOrNull()
+    }
+
+    suspend fun getUserProfil(): UserProfile? {
+        return context.dataStore.data.map { preferences ->
+            UserProfile(
+                firstName = preferences[PreferencesKeys.FIRST_NAME],
+                lastName = preferences[PreferencesKeys.LAST_NAME],
+                phone = preferences[PreferencesKeys.PHONE],
+                email = preferences[PreferencesKeys.EMAIL],
+                avatar = preferences[PreferencesKeys.AVATAR]
+            )
         }.firstOrNull()
     }
 }
