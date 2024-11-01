@@ -65,6 +65,7 @@ class DetailDestinationActivity : AppCompatActivity() {
             binding.ratingBar.rating = data.popularity?.toFloat() ?: 0f
             binding.tvRateDestination.text = data.popularity?.toString() ?: "0"
             binding.tvActivityDetailDestination.text = data.activity?.toString() ?: "0"
+            binding.tvFillEstimateDetailDestination.text = data.duration
         } else {
             showError("No details available")
         }
@@ -77,7 +78,7 @@ class DetailDestinationActivity : AppCompatActivity() {
         binding.btnSaveDestination.setOnClickListener {
             destinationData?.let { data ->
                 val intent = Intent(this, AddItineraryActivity::class.java)
-                intent.putExtra("destination_data", data) // serializable data
+                intent.putExtra("destination_data", data)
                 startActivity(intent)
             } ?: run {
                 showError("No destination data available to save")

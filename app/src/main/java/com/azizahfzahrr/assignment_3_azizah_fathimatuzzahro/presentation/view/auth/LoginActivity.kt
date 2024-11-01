@@ -2,6 +2,7 @@ package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.a
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -47,8 +48,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkIfUserLoggedIn() {
-        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val isLoggedIn = sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false)
+        val isLoggedIn = sharedPreferences().getBoolean(KEY_IS_LOGGED_IN, false)
 
         if (isLoggedIn) {
             navigateToPreferencesActivity()
@@ -65,9 +65,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun saveLoginState() {
-        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        sharedPreferences.edit().putBoolean(KEY_IS_LOGGED_IN, true).apply()
+        sharedPreferences().edit().putBoolean(KEY_IS_LOGGED_IN, true).apply()
     }
+
+    private fun sharedPreferences(): SharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     private fun navigateToPreferencesActivity() {
         val intent = Intent(this, PreferencesActivity::class.java)

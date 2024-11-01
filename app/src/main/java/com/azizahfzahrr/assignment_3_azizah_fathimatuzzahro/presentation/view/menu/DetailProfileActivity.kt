@@ -4,14 +4,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.LoginResponse
+import com.bumptech.glide.Glide
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.databinding.ActivityDetailProfileBinding
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.viewmodel.UserProfileViewModel
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.viewmodel.UserState
-import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailProfileActivity : AppCompatActivity() {
@@ -28,40 +24,36 @@ class DetailProfileActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        observeUserProfile()
+        val firstName = intent.getStringExtra("EXTRA_FIRST_NAME") ?: "Unknown"
+        val lastName = intent.getStringExtra("EXTRA_LAST_NAME") ?: "Unknown"
+        val email = intent.getStringExtra("EXTRA_EMAIL") ?: "Unknown"
+        val phone = intent.getStringExtra("EXTRA_PHONE") ?: "Unknown"
+        val avatarUrl = intent.getStringExtra("EXTRA_AVATAR")
+
+        populateUserProfile(firstName, lastName, email, phone, avatarUrl)
+
+        // Remove observeUserProfile if not necessary
+        // Commenting out the function to avoid unnecessary state emissions
+        // observeUserProfile()
     }
 
-    private fun observeUserProfile() {
-        lifecycleScope.launch {
-            viewModel.userState.collect { state ->
-                when (state) {
-                    is UserState.Loading -> {
-                        // buat nampil loading kalo perlu
-                    }
-                    is UserState.Success -> {
-                        populateUserProfile(state.user)
-                    }
-                    is UserState.Error -> {
-                        showError(state.message)
-                    }
+    private fun populateUserProfile(firstName: String?, lastName: String?, email: String?, phone: String?, avatarUrl: String?) {
+        binding.etFirstName.setText(firstName)
+        binding.etLastName.setText(lastName)
+        binding.etEmail.setText(email)
+        binding.etPhone.setText(phone)
 
-                    UserState.Logout -> TODO()
-                }
-            }
-        }
-    }
-
-    private fun populateUserProfile(data: LoginResponse.Data?) {
-        data?.let {
+        avatarUrl?.let {
             Glide.with(this)
-                .load(it.avatar)
+                .load(it)
                 .circleCrop()
                 .into(binding.ivAvatarEditProfile)
+        } ?: run {
 
-            binding.etFirstName.setText(it.firstName)
-            binding.etLastName.setText(it.lastName)
-            binding.etEmail.setText(it.email)
-            binding.etPhone.setText(it.phone)
+            Glide.with(this)
+                .load("https://cdn.antaranews.com/cache/1200x800/2023/03/01/6C28C3C3-550F-4868-9E6A-641681A377AA.jpeg.webp")
+                .circleCrop()
+                .into(binding.ivAvatarEditProfile)
         }
     }
 

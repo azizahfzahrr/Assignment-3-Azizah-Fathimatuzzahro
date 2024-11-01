@@ -1,5 +1,6 @@
 package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -27,6 +28,10 @@ class ItineraryFragment : Fragment() {
     private lateinit var itineraryAdapter: ItineraryAdapter
     private lateinit var binding: FragmentItineraryBinding
 
+    companion object{
+        private const val REQUEST_CODE_DETAIL_ITINERARY = 2
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,14 +46,16 @@ class ItineraryFragment : Fragment() {
         itineraryAdapter = ItineraryAdapter { itinerary ->
             val intent = Intent(requireContext(), DetailItineraryActivity::class.java).apply {
                 putExtra("itinerary_name", itinerary.name)
+                putExtra("itinerary_activity", itinerary.activity)
+                putExtra("itinerary_duration", itinerary.duration)
                 putExtra("itinerary_location", itinerary.location)
                 putExtra("itinerary_popularity", itinerary.popularity)
                 putExtra("itinerary_type", itinerary.type)
                 putExtra("itinerary_image", itinerary.image)
+                putExtra("itinerary_notes", itinerary.notes)
             }
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE_DETAIL_ITINERARY)
         }
-
         binding.rvItinerary.layoutManager = LinearLayoutManager(context)
         binding.rvItinerary.adapter = itineraryAdapter
 
@@ -62,6 +69,23 @@ class ItineraryFragment : Fragment() {
                 binding.rvItinerary.visibility = View.VISIBLE
                 binding.tvNoData.visibility = View.GONE
                 itineraryAdapter.submitList(itineraries)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_DETAIL_ITINERARY && resultCode == Activity.RESULT_OK){
+            val updateNotes = data?.getStringExtra("updated_notes")
+            if (updateNotes != null){
+                val updateList = viewModel.allItineraries.value?.map { itinerary ->
+                    if (itinerary.name == data.getStringExtra("itinerary_name")){
+                        itinerary.copy(notes = updateNotes)
+                    } else {
+                        itinerary
+                    }
+                }
+                itineraryAdapter.submitList(updateList)
             }
         }
     }

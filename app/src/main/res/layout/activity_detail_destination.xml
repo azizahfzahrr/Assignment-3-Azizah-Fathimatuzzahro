@@ -130,6 +130,31 @@
                 />
 
             <TextView
+                android:id="@+id/tv_estimate_detail_destination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estimate"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_marginEnd="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_place_destination_detail"/>
+
+            <TextView
+                android:id="@+id/tv_fill_estimate_detail_destination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3D 2N"
+                android:textSize="10sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins"
+                android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@id/tv_estimate_detail_destination"
+                app:layout_constraintBottom_toBottomOf="@id/tv_estimate_detail_destination"
+                app:layout_constraintStart_toEndOf="@id/tv_estimate_detail_destination"/>
+
+            <TextView
                 android:id="@+id/tv_activity_detail_destination"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -140,8 +165,6 @@
                 app:layout_constraintTop_toBottomOf="@id/ratingBar"
                 app:layout_constraintStart_toStartOf="@id/ratingBar"
                 />
-
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_save_destination"
                 android:layout_width="0dp"

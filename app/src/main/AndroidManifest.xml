@@ -23,12 +23,9 @@
             android:name=".presentation.view.menu.ListAllActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.view.menu.ListAllDestinationActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.view.itinerary.AddItineraryActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.view.menu.PrivacyPolicyActivity"
             android:exported="false" />

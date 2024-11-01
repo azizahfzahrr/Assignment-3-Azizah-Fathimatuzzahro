@@ -12,13 +12,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.LoginResponse
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.source.local.UserPreferences
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.source.local.UserSession
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.databinding.FragmentProfileBinding
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.auth.LoginActivity
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.viewmodel.UserProfileViewModel
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.viewmodel.UserState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -39,8 +36,24 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
-            viewModel.getUserData {
-                displayUser(it)
+            viewModel.getUserData { userProfile ->
+                if (userProfile != null) {
+                    displayUser(userProfile)
+
+                    // Set up the click listener for the right arrow
+                    binding.ivArrowRightProfile.setOnClickListener {
+                        val intent = Intent(requireContext(), DetailProfileActivity::class.java).apply {
+                            putExtra("EXTRA_FIRST_NAME", userProfile.firstName)
+                            putExtra("EXTRA_LAST_NAME", userProfile.lastName)
+                            putExtra("EXTRA_EMAIL", userProfile.email)
+                            putExtra("EXTRA_PHONE", userProfile.phone)
+                            putExtra("EXTRA_AVATAR", userProfile.avatar)
+                        }
+                        startActivity(intent)
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "User profile not found", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -52,24 +65,20 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(requireContext(), PrivacyPolicyActivity::class.java))
         }
 
-        binding.ivArrowRightProfile.setOnClickListener {
-            startActivity(Intent(requireContext(), DetailProfileActivity::class.java))
-        }
-
         binding.tvLogout.setOnClickListener {
             showLogoutConfirmationDialog()
         }
     }
 
-    private fun displayUser(user: UserPreferences.UserProfile?) {
+    private fun displayUser(user: UserPreferences.UserProfile) {
         binding.apply {
             Glide.with(this@ProfileFragment)
-                .load(user?.avatar ?: "https://cdn.antaranews.com/cache/1200x800/2023/03/01/6C28C3C3-550F-4868-9E6A-641681A377AA.jpeg.webp")
+                .load(user.avatar ?: "https://cdn.antaranews.com/cache/1200x800/2023/03/01/6C28C3C3-550F-4868-9E6A-641681A377AA.jpeg.webp")
                 .circleCrop()
                 .into(binding.profileImage)
-            tvFirstName.text = user?.firstName ?: "No first name"
-            tvLastName.text = user?.lastName ?: "No last name"
-            tvEmailProfile.text = user?.email ?: "No email"
+            tvFirstName.text = user.firstName ?: "No first name"
+            tvLastName.text = user.lastName ?: "No last name"
+            tvEmailProfile.text = user.email ?: "No email"
         }
     }
 
