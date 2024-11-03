@@ -23,13 +23,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ItineraryFragment : Fragment() {
-
     private lateinit var viewModel: ItineraryViewModel
     private lateinit var itineraryAdapter: ItineraryAdapter
     private lateinit var binding: FragmentItineraryBinding
 
     companion object{
-        private const val REQUEST_CODE_DETAIL_ITINERARY = 2
+        const val REQUEST_CODE_DETAIL_ITINERARY = 2
     }
 
     override fun onCreateView(
@@ -39,12 +38,11 @@ class ItineraryFragment : Fragment() {
         binding = FragmentItineraryBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[ItineraryViewModel::class.java]
         itineraryAdapter = ItineraryAdapter { itinerary ->
-            val intent = Intent(requireContext(), DetailItineraryActivity::class.java).apply {
+            val intent = Intent(context, DetailItineraryActivity::class.java).apply {
                 putExtra("itinerary_name", itinerary.name)
                 putExtra("itinerary_activity", itinerary.activity)
                 putExtra("itinerary_duration", itinerary.duration)
@@ -72,20 +70,31 @@ class ItineraryFragment : Fragment() {
             }
         }
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_DETAIL_ITINERARY && resultCode == Activity.RESULT_OK){
+        Log.d("azizah", "onActivityResult $resultCode, ${data?.getStringExtra("updated_notes")}, ${data?.getStringExtra("itinerary_name")}, ${data?.getStringExtra("action_type")}")
+
+        if (resultCode == Activity.RESULT_OK) {
             val updateNotes = data?.getStringExtra("updated_notes")
-            if (updateNotes != null){
+            val itineraryName = data?.getStringExtra("itinerary_name")
+            val actionType = data?.getStringExtra("action_type") // New line to get action type
+
+            if (actionType == "edit" && updateNotes != null && itineraryName != null) {
                 val updateList = viewModel.allItineraries.value?.map { itinerary ->
-                    if (itinerary.name == data.getStringExtra("itinerary_name")){
+                    if (itinerary.name == itineraryName) {
                         itinerary.copy(notes = updateNotes)
                     } else {
                         itinerary
                     }
                 }
                 itineraryAdapter.submitList(updateList)
+                itineraryAdapter.notifyDataSetChanged()
+            } else if (actionType == "delete" && itineraryName != null) {
+                val updatedList = viewModel.allItineraries.value?.filter { itinerary ->
+                    itinerary.name != itineraryName
+                }
+                itineraryAdapter.submitList(updatedList)
+                itineraryAdapter.notifyDataSetChanged()
             }
         }
     }

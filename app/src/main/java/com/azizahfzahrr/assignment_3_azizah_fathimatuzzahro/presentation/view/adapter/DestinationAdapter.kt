@@ -3,7 +3,6 @@ package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.a
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.R
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.TravelResponse
 import com.bumptech.glide.Glide
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.databinding.ItemDestinationRowBinding
@@ -26,7 +25,6 @@ class DestinationAdapter(private val onItemClick: (Int) -> Unit) : RecyclerView.
             binding.tvNameDestination.text = destination.name
             binding.tvPlaceDestination.text = destination.location
             binding.tvTypeDestination.text = destination.type
-
 
             destination.image?.let {
                 Glide.with(binding.root.context)
@@ -69,7 +67,7 @@ class DestinationAdapter(private val onItemClick: (Int) -> Unit) : RecyclerView.
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (isLoading && position == destinations.size) VIEW_TYPE_SHIMMER else VIEW_TYPE_ITEM
+        return if (isLoading && position >= destinations.size) VIEW_TYPE_SHIMMER else VIEW_TYPE_ITEM
     }
 
     override fun getItemCount(): Int {
@@ -77,33 +75,28 @@ class DestinationAdapter(private val onItemClick: (Int) -> Unit) : RecyclerView.
     }
 
     fun setDestinations(newDestinations: List<TravelResponse.Data?>) {
-        destinations.clear()
+        destinations.clear() // Clear existing items for initial load
         destinations.addAll(newDestinations)
         notifyDataSetChanged()
     }
 
     fun updateDestinations(newDestinations: List<TravelResponse.Data?>) {
-        destinations.clear()
+        val startPosition = destinations.size
         destinations.addAll(newDestinations)
-        notifyDataSetChanged()
-    }
-
-    fun addDestinations(newDestinations: List<TravelResponse.Data>) {
-        if (newDestinations.isNotEmpty()) {
-            val startPosition = destinations.size
-            destinations.addAll(newDestinations)
-            isLoading = false
-            notifyItemRangeInserted(startPosition, newDestinations.size)
-        }
+        notifyItemRangeInserted(startPosition, newDestinations.size)
     }
 
     fun showLoading() {
-        isLoading = true
-        notifyItemInserted(destinations.size)
+        if (!isLoading) {
+            isLoading = true
+            notifyItemInserted(destinations.size)
+        }
     }
 
     fun hideLoading() {
-        isLoading = false
-        notifyItemRemoved(destinations.size)
+        if (isLoading) {
+            isLoading = false
+            notifyItemRemoved(destinations.size)
+        }
     }
 }

@@ -8,4 +8,5 @@ import javax.inject.Inject
 interface ItineraryRepository {
     suspend fun insert(itinerary: ItineraryEntity)
     fun getAllItineraries(): LiveData<List<ItineraryEntity>>
+    suspend fun delete(itinerary: ItineraryEntity)
 }

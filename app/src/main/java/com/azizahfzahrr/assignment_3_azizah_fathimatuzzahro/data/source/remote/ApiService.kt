@@ -1,6 +1,7 @@
 package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.source.remote
 
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.DetailTravelResponse
+import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.ListResponse
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.LoginRequest
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.LoginResponse
 import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.PreferencesResponse
@@ -8,6 +9,7 @@ import com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.data.model.TravelRes
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -19,6 +21,11 @@ interface ApiService {
 
     @GET("travel")
     suspend fun getTravelData(
+        @Query("page") page: Int,
+    ): Response<TravelResponse>
+
+    @GET("travel")
+    suspend fun getAllDestinations(
         @Query("page") page: Int,
     ): Response<TravelResponse>
 

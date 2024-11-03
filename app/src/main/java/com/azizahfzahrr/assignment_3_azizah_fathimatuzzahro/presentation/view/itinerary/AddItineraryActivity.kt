@@ -1,5 +1,6 @@
 package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.itinerary
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
@@ -53,7 +54,10 @@ class AddItineraryActivity : AppCompatActivity() {
                     notes = binding.etNotes.text.toString()
                 )
             )
-            MainActivity.launchIntent(this@AddItineraryActivity, ItineraryFragment())
+            Intent(this, MainActivity::class.java).run{
+                putExtra("action_type", "add")
+                startActivity(this)
+            }
         }
         binding.cardBackButton.setOnClickListener {
             onBackPressed()

@@ -1,6 +1,8 @@
 package com.azizahfzahrr.assignment_3_azizah_fathimatuzzahro.presentation.view.menu
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -63,10 +65,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        selectedType = requireActivity().intent.getStringExtra("selectedType")
+        selectedType = arguments?.getString("selectedType")
 
         binding.tvTitle.text = getString(R.string.explore_the_world_today)
         binding.tvSubtitle.text = getString(R.string.discover_take_your_travel_to_next_level)
+        binding.tvViewAllList.setOnClickListener {
+            val intent = Intent(activity, ListAllActivity::class.java)
+            startActivity(intent)
+        }
 
         setupRecyclerView()
         setupSwipeRefreshLayout()
@@ -92,28 +98,16 @@ class HomeFragment : Fragment() {
 
     private fun filterDestinations(query: String) {
         val filteredList = if (query.isEmpty()) {
-            originalDestinations
+            originalDestinations.filter { it?.type == selectedType }
         } else {
             originalDestinations.filter { destination ->
                 val nameMatches = destination?.name?.contains(query, ignoreCase = true) == true
-                nameMatches
+                val typeMatches = destination?.type == selectedType
+                nameMatches && typeMatches
             }
         }
         destinationAdapter.setDestinations(filteredList)
     }
-
-//    private fun loadUserAvatar(avatarUrl: String?) {
-//        Log.d("HomeFragment", "Loading avatar from URL: $avatarUrl")
-//
-//        if (!avatarUrl.isNullOrEmpty()) {
-//            Glide.with(this)
-//                .load(avatarUrl)
-//                .circleCrop()
-//                .into(binding.ivProfileHome)
-//        } else {
-//            showError("Avatar URL is empty.")
-//        }
-//    }
 
     private fun setupRecyclerView() {
         destinationAdapter = DestinationAdapter { destinationId ->
@@ -169,19 +163,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
-//    private fun observeViewModel() {
-//        userProfileViewModel.userProfile.observe(viewLifecycleOwner) { userProfile ->
-//            val avatarUrl = userProfile?.data?.avatar // Get avatar URL from user profile
-//            Log.d("HomeFragment", "Fetched user profile: $userProfile") // Log the entire user profile
-//
-//            loadUserAvatar(avatarUrl)
-//
-//            lifecycleScope.launch {
-//                originalDestinations = homeViewModel.travelData.value ?: emptyList()
-//            }
-//        }
-//    }
 
     private fun showError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()

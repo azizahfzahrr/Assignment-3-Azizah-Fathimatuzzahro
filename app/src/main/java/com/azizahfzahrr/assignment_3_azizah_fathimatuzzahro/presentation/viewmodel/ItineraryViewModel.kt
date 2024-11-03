@@ -19,21 +19,7 @@ class ItineraryViewModel @Inject constructor(
     private val itineraryRepository: ItineraryRepository
 ) : ViewModel() {
 
-//    private val _itineraryData = MutableLiveData<ItineraryEntity?>()
-//    val itineraryData: LiveData<ItineraryEntity?> get() = _itineraryData
-
     val allItineraries: LiveData<List<ItineraryEntity>> = itineraryRepository.getAllItineraries()
-
-//    fun insertItinerary(itinerary: ItineraryEntity) {
-//        viewModelScope.launch {
-//            try {
-//                itineraryRepository.insert(itinerary)
-//                _itineraryData.postValue(itinerary)
-//            } catch (e: Exception) {
-//                Log.e("ItineraryViewModel", "Error inserting itinerary: ${e.message}")
-//            }
-//        }
-//    }
 }
 
 
