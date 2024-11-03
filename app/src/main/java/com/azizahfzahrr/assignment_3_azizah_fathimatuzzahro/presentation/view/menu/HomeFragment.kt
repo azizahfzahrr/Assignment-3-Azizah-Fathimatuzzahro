@@ -101,13 +101,15 @@ class HomeFragment : Fragment() {
             originalDestinations.filter { it?.type == selectedType }
         } else {
             originalDestinations.filter { destination ->
-                val nameMatches = destination?.name?.contains(query, ignoreCase = true) == true
+                val nameMatches = destination?.name?.contains(query, ignoreCase = true) ?: false
                 val typeMatches = destination?.type == selectedType
                 nameMatches && typeMatches
             }
         }
+
         destinationAdapter.setDestinations(filteredList)
     }
+
 
     private fun setupRecyclerView() {
         destinationAdapter = DestinationAdapter { destinationId ->
@@ -151,8 +153,8 @@ class HomeFragment : Fragment() {
             if (travelData.isNullOrEmpty()) {
                 showError("No travel data available.")
             } else {
-                originalDestinations = travelData
-                val filteredData = travelData.filter { it?.type == selectedType }
+                originalDestinations = travelData.filterNotNull()
+                val filteredData = travelData.filter { it.type == selectedType }
                 destinationAdapter.setDestinations(filteredData)
             }
         }

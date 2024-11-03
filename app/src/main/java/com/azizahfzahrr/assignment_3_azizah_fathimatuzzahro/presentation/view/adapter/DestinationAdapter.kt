@@ -75,7 +75,7 @@ class DestinationAdapter(private val onItemClick: (Int) -> Unit) : RecyclerView.
     }
 
     fun setDestinations(newDestinations: List<TravelResponse.Data?>) {
-        destinations.clear() // Clear existing items for initial load
+        destinations.clear()
         destinations.addAll(newDestinations)
         notifyDataSetChanged()
     }
