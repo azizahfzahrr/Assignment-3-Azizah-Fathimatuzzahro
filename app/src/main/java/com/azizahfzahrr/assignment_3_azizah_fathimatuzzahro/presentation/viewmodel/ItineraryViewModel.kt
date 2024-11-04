@@ -20,6 +20,12 @@ class ItineraryViewModel @Inject constructor(
 ) : ViewModel() {
 
     val allItineraries: LiveData<List<ItineraryEntity>> = itineraryRepository.getAllItineraries()
+
+    fun deleteItinerary(itinerary: ItineraryEntity) {
+        viewModelScope.launch {
+            itineraryRepository.delete(itinerary)
+        }
+    }
 }
 
 

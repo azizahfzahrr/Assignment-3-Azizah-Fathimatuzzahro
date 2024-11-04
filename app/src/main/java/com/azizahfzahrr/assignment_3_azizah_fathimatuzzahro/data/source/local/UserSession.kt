@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UserSession @Inject constructor(private val userPreferences: UserPreferences) {
+open class UserSession @Inject constructor(private val userPreferences: UserPreferences) {
 
     suspend fun saveUserData(data: LoginResponse.Data) {
         userPreferences.saveUserData(data)

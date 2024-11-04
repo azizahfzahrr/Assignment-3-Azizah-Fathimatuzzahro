@@ -82,7 +82,6 @@ class HomeFragment : Fragment() {
             userProfileViewModel.fetchUserProfile()
             homeViewModel.fetchTravelData()
         }
-
     }
 
     private fun setupSearchFunctionality() {
@@ -97,11 +96,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun filterDestinations(query: String) {
-        val filteredList = if (query.isEmpty()) {
+        val trimmedQuery = query.trim()
+        val filteredList = if (trimmedQuery.isEmpty()) {
             originalDestinations.filter { it?.type == selectedType }
         } else {
             originalDestinations.filter { destination ->
-                val nameMatches = destination?.name?.contains(query, ignoreCase = true) ?: false
+                val nameMatches = destination?.name?.contains(trimmedQuery, ignoreCase = true) ?: false
                 val typeMatches = destination?.type == selectedType
                 nameMatches && typeMatches
             }
@@ -109,7 +109,6 @@ class HomeFragment : Fragment() {
 
         destinationAdapter.setDestinations(filteredList)
     }
-
 
     private fun setupRecyclerView() {
         destinationAdapter = DestinationAdapter { destinationId ->
