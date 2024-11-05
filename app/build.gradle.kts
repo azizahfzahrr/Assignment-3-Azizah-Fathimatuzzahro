@@ -73,6 +73,7 @@ dependencies {
     androidTestImplementation("androidx.test:rules:1.5.0")
     androidTestImplementation("androidx.test:runner:1.5.2")
     testImplementation("io.mockk:mockk:1.12.0")
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
 
 

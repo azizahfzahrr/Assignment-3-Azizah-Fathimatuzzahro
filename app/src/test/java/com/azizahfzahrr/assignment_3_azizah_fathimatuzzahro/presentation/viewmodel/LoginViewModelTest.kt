@@ -20,7 +20,9 @@ import org.mockito.junit.MockitoJUnitRunner
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import androidx.lifecycle.Observer
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class LoginViewModelTest {
     @get:Rule
@@ -63,7 +65,8 @@ class LoginViewModelTest {
             phone = "1234567890",
             token = "token123"
         )
-        val loginResponse = LoginResponse(success = true, message = "login successful", data = userData)
+        val loginResponse =
+            LoginResponse(success = true, message = "login successful", data = userData)
 
         `when`(authRepository.login(email, password)).thenReturn(loginResponse)
 
